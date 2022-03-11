@@ -1,0 +1,34 @@
+author: 
+description: A Blink JS app for jsar
+# arch: PLATFORM
+version: 1.0
+manifest_version: 2017-05-18
+libs_version: ${mos.version}
+modules_version: ${mos.version}
+mongoose_os_version: ${mos.version}
+
+tags:
+  - js
+
+filesystem:
+  - fs
+
+config_schema:
+  - ["wifi.ap.enable", false]
+  - ["wifi.sta.enable", false]
+  - ["bt.enable", false]
+  - ["http.enable", false]
+
+
+libs:
+  - location: https://github.com/AppliedRobotics/mgos-jsar
+  - location: https://github.com/hold3r/mgos-jsar-servo
+
+
+conds:
+  - when: mos.platform == "esp32"
+    apply:
+      build_vars:
+        # Icrease app szie for ESP32
+        APP_SLOT_SIZE: 0x190000
+        MGOS_DEBUG_UART: 3
